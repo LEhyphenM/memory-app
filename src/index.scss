@@ -1,0 +1,406 @@
+// bower:scss
+// endbower
+
+
+
+@import 'https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,900';
+
+
+//Variables
+$white:#FFF;
+$black:#000;
+$powder:#F2F2F2;
+$fog:#D9D9D9;
+$steel:#AAA;
+$charcoal:#262626;
+
+$melon:#15CAB7;
+$turqouise:#11A395;
+$forest:#073D38;
+
+
+@mixin defaultText {
+	font-family:'Lato', Helvetica, Arial, sans-serif;
+	text-transform:uppercase;
+	letter-spacing:1.25px;
+	color:$white;
+}
+
+*,
+*:before,
+*:after { box-sizing: border-box; }
+
+
+body {
+  font-family:'Lato', Helvetica, Arial, sans-serif;
+  color:$powder;
+  cursor:default;
+  background:darken($melon, 20%);
+}
+
+// === Typography === //
+h1, h2, h3, h4, h5, h6 {
+    font-weight:normal;
+    margin:0;
+}
+
+h1 {font-size: 60px;}
+h2 {font-size: 44px;}
+h3 {font-size: 36px;}
+h4 {font-size: 24px;}
+h5 {font-size: 18px;}
+h6 {font-size: 12px;}
+
+// === Utility === //
+.textCenter {text-align:center;}
+.padded{padding:16px;}
+.uppercase{text-transform:uppercase;}
+.link {text-decoration:none; font-weight:bolder;} 
+.container{max-width:1100px; margin:0 auto;}
+button:focus{outline:0;}
+.mobile{display:none;}
+a, ul, li {text-decoration:none; list-style-type:none;}
+
+// === Main Content === //
+
+.main{
+	width:100%;
+	height:auto;
+	padding:60px 0 0px;
+	h2{
+		@include defaultText;
+		font-weight:300;
+		letter-spacing:4px;
+	}
+	h5{
+		@include defaultText;
+		font-weight:600;
+		padding:25px 0 30px;
+		letter-spacing:3px;
+	}
+}
+
+// === Cards === //
+
+//Card Variables
+$card-size:150px;
+$flip-duration:0.8s;
+$perspective:1000px;
+
+.card {
+	perspective:$perspective;
+ 	img{
+ 		width:100%;
+ 	}
+}
+
+.Board {
+	padding:20px 10px;
+}
+
+.buffer {
+	margin:0;
+	display:inline-flex;
+	padding:5px;
+	&:hover{
+		cursor:pointer;
+	}
+}
+
+.card .front:hover{
+	background:lighten($melon, 18%);
+}
+
+.card.active .flip {
+	transform:rotateY(180deg);
+}
+
+.card, .front, .back {
+	width:$card-size;
+	height:$card-size;
+	overflow:hidden;
+}
+
+.front, .back {
+	width:$card-size;
+	height:$card-size;
+  	backface-visibility:hidden;
+    position:absolute;
+    top:0;
+    left:0;
+    margin-bottom:-$card-size / 2;
+    background:$melon;
+}
+
+.front {
+	z-index:2;
+	transform:rotateY(0deg);
+  	position:relative;
+}
+
+.back {
+	transform:rotateY(180deg);
+}
+
+.flip {
+	transition:$flip-duration;
+	transform-style:preserve-3d;
+	position:relative;
+}
+
+.reset {
+	background:darken($melon, 20%);
+	outline:none;
+	padding:7px 12px 6px;
+	border:2px solid $powder;
+	border-radius:3px;
+	text-decoration:none;
+	color:$powder;
+	transition:300ms;
+	text-transform:uppercase;
+	font-size:12px;
+	font-weight:600;
+	line-height:14px;
+	&:hover{
+		cursor:pointer;
+		background:$powder;
+		color:darken($melon, 20%);
+	}
+}
+
+// === Footer === //
+
+footer{
+	padding:15px 0;
+  p{
+  	@include defaultText;
+  	font-weight:400;
+    font-size:12px;
+  }
+}
+
+
+/* === Media Queries === */
+
+
+
+@media screen 
+and (min-width:400px)
+and (max-width:435px) {
+
+	.main { 
+		padding:35px 0 0;
+		h2{font-size:32px;}
+		h5{padding:20px 0 10px;}
+	}
+
+	.buffer{padding:3px;}
+
+	.card, .front, .back{
+		width:85px;
+		height:85px;
+	}
+
+	footer p {
+		font-size:11px;
+		letter-spacing:0.5px;
+		font-weight:300;
+	}
+
+}
+
+@media screen 
+and (min-width:436px)
+and (max-width:550px){
+	.main{
+		padding:35px 0 0;
+		h2{font-size:36px;}
+		h5{padding:15px 0 8px;}
+	}
+
+	.Board{padding:20px 0;}
+
+	.buffer{padding:4px;}
+
+	.card, .front, .back{
+		width:100px;
+		height:100px;
+	}
+}
+
+/* iPhone 5 & 5s */
+/* Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation:landscape) {
+
+  	.buffer{padding:3px;}
+
+}
+/* iPhone 5 & 5s */
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+  	.main{
+  		padding:50px 0 0;
+  		h2{font-size:28px;}
+  		h5{
+  			font-size:14px; 
+  			padding:15px 0;
+  		}
+  	}
+
+  	.buffer {padding:3px;}
+
+  	.card, .front, .back {
+		width:80px;
+		height:80px;
+	}
+
+	footer p {
+		font-size:9.5px;
+		letter-spacing:0.5px;
+		font-weight:300;
+	}
+
+  }
+
+
+/* iPhone 6, iPhone 6s, iPhone 7 */ 
+@media only screen 
+and (min-width: 375px) 
+and (max-width: 667px) 
+and (-webkit-min-device-pixel-ratio: 2) {
+
+	.main{
+		padding:50px 0 0px;
+		h5{padding:20px 0;}
+	}
+
+	.card, .front, .back {
+		width:100px;
+		height:100px;
+	}
+}
+
+/* iPhone 6, iPhone 6s, iPhone 7 */ 
+/* landscape Only Styles */
+@media only screen 
+and (min-width: 375px) 
+and (max-width: 667px) 
+and (-webkit-min-device-pixel-ratio: 2) 
+and (orientation: Landscape) {
+
+	.main {
+		h2{font-size:44px;}
+	}
+}
+
+/* iPhone 6, iPhone 6s, iPhone 7 */ 
+/* Portrait Only Styles */
+@media only screen 
+and (min-width: 375px) 
+and (max-width: 667px) 
+and (-webkit-min-device-pixel-ratio: 2) 
+and (orientation: portrait) {
+
+	.main {
+		h2{font-size:32px;}
+		h5{font-size:16px;}
+	}
+
+	footer p {
+		font-size:11px;  
+		letter-spacing:0.5px;
+	}
+
+}
+
+/* iPhone 6+, iPhone 6s+, iPhone 7+ */ 
+/* Portrait & Landscape Styles */
+@media only screen 
+and (min-width: 414px) 
+and (max-width: 736px) 
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2) {
+
+}
+
+/* iPad Mini */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (-webkit-min-device-pixel-ratio: 1)  {
+
+	.main{
+		padding:50px 0 0;
+	}
+	footer p{
+		font-size:13px;
+		letter-spacing:3px;
+	}
+}
+
+
+/* iPad Mini Landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : Landscape)
+and (-webkit-min-device-pixel-ratio: 1)  {
+	.card, .front, .back{
+		width:155px;
+		height:155px;
+	}
+}
+
+/* iPad Mini Portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio: 1)  {
+
+	.card, .front, .back{
+		width:170px;
+		height:170px;
+	}
+
+}
+
+
+// === Media Queries === //
+@media all and (min-width: 960px) {
+
+	.main{
+		padding:60px 0 30px;
+		h2{font-size:48px;}
+	}
+
+	.card, .front, .back{
+		width:170px;
+		height:170px;
+	}
+
+ // Establish all items within a row as being flexbox-enabled
+  .row { display: flex; }
+
+  // Any class that begins with "col-" gets 20px of right margin
+  [class*="col-"] { margin-right: 20px; }
+
+  // The last column in a row gets the right margin removed
+  [class*="col-"]:last-child { margin-right: 0; }
+
+  // Create 12 columns where $i is the index number in the loop.
+  // This will create 12 classes: .col-1, .col-2, .col-3, etc...
+  // These 12 classes will have the flex property of the index number in the loop.
+  @for $i from 1 through 12 {
+      .col-#{$i} { flex: $i; }
+  }
+}
